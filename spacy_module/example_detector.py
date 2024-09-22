@@ -6,10 +6,10 @@ nlp = spacy.load("es_core_news_md")  # Modelo en español
 matcher = Matcher(nlp.vocab)  # Inicializar matcher
 
 pattern_clima_actual = [
-    {"LOWER": {"IN": ["clima", "tiempo", "frío", "calor", "abrigo"]}},
+    {"LOWER": {"IN": ["clima", "tiempo", "abrigo"]}},
     {"LOWER": {"IN": ["hoy", "ahora", "actual", "momento", "en este momento"]}, "OP": "?"},  # Contexto de tiempo actual
     {"LOWER": {"IN": ["está", "haciendo", "cómo", "es", "hay"]}, "OP": "?"},  # Verbos de tiempo presente
-    {"LOWER": {"NOT_IN": ["mañana", "próxima", "noche", "tarde", "fin de semana"]}}  # Evitar palabras clave de futuro
+    {"LOWER": {"NOT_IN": ["estará", "hará", "habrá","mañana", "próxima", "noche", "tarde", "fin de semana"]}}  # Evitar palabras clave de futuro
 ]
 
 
@@ -44,10 +44,10 @@ def detectar_intencion(texto):
 
 # Ejemplo de prueba
 textos = [
-    "¿Cómo está el clima?",
-    "Hace frío?",
-    "¿Debo ponerme abrigo?",
-    "¿Cómo estará el tiempo hoy?"
+    "¿Cómo estará el clima mañana?",
+    "Hará frío?",
+    # "¿Debo ponerme abrigo?",
+    "¿Cómo estará el tiempo mañana?"
 ]
 
 for texto in textos:
